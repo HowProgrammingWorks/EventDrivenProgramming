@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Live table</h1>
+<table id="table"></table>
+<script>
+
+  var table = document.getElementById('table');
+  var cells = {};
+  var letters = ['A', 'B', 'C', 'D'];
+
+  var tr, element;
+  for (var i = 1; i <= 5; i++) {
+    tr = document.createElement('tr');
+    tr.innerHTML = letters.map(function(col) {
+      return '<td><input id="' + col + i + '" type="text"></td>'
+    }).join('');
+    table.appendChild(tr);
+    letters.forEach(function(col) {
+      var cell = col + i;
+      cells[cell] = document.getElementById(cell);
+      cells[cell].value = cell;
+      cells[cell].addEventListener('keyup', keyup);
+    });
+  }
+
+  function keyup(event) {
+    socket.send(JSON.stringify({
+      cell: event.target.id,
+      value: event.target.value
+    }));
+  }
+
+  var socket = new WebSocket('ws://127.0.0.1/chat');
+
+  socket.onmessage = function(event) {
+    var change = JSON.parse(event.data);
+    var cell = cells[change.cell];
+    cell.value = change.value;
+  };
+
+</script>
+</body>
+</html>
