@@ -3,24 +3,33 @@
 <body>
 <h1>Live table</h1>
 <table id="table"></table>
+<style>
+input { border: 1px solid green; width: 30px; }
+</style>
 <script>
 
   var table = document.getElementById('table');
   var cells = {};
-  var letters = ['A', 'B', 'C', 'D'];
+  var letters = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-  var tr, element;
+  var tr;
+  tr = document.createElement('tr');
+  tr.innerHTML = '<td></td>' + letters.map(function(col) {
+    return '<td>' + col + '</td>'
+  }).join('');
+  table.appendChild(tr);
+  
   for (var i = 1; i <= 5; i++) {
     tr = document.createElement('tr');
-    tr.innerHTML = letters.map(function(col) {
-      return '<td><input id="' + col + i + '" type="text"></td>'
+    tr.innerHTML = '<td>' + i + '</td>' + letters.map(function(col) {
+      return '<td><input id="' + col + i + '" type="text"></td>';
     }).join('');
     table.appendChild(tr);
     letters.forEach(function(col) {
       var cell = col + i;
-      cells[cell] = document.getElementById(cell);
-      cells[cell].value = cell;
-      cells[cell].addEventListener('keyup', keyup);
+      var input = document.getElementById(cell);
+      input.addEventListener('keyup', keyup);
+      cells[cell] = input;
     });
   }
 
