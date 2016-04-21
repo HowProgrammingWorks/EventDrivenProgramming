@@ -15,10 +15,10 @@ input { border: 1px solid green; width: 30px; }
   var tr;
   tr = document.createElement('tr');
   tr.innerHTML = '<td></td>' + letters.map(function(col) {
-    return '<td>' + col + '</td>'
+    return '<td>' + col + '</td>';
   }).join('');
   table.appendChild(tr);
-  
+
   for (var i = 1; i <= 5; i++) {
     tr = document.createElement('tr');
     tr.innerHTML = '<td>' + i + '</td>' + letters.map(function(col) {
@@ -40,7 +40,7 @@ input { border: 1px solid green; width: 30px; }
     }));
   }
 
-  var socket = new WebSocket('ws://127.0.0.1/chat');
+  var socket = new WebSocket('ws://127.0.0.1/');
 
   socket.onmessage = function(event) {
     var change = JSON.parse(event.data);
