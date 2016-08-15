@@ -4,14 +4,14 @@ global.EventEmitter = function() {
   this.events = {};
 };
 
-EventEmitter.prototype.on = function(name, callback) {
+EventEmitter.prototype.on = (name, callback) => {
   this.events[name] = this.events[name] || [];
   this.events[name].push(callback);
 };
 
-EventEmitter.prototype.emit = function(name, data) {
-  var event = this.events[name];
-  if (event) event.forEach(function(callback) {
+EventEmitter.prototype.emit = (name, data) => {
+  let event = this.events[name];
+  if (event) event.forEach((callback) => {
     callback(data);
   });
 };

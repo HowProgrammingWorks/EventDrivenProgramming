@@ -5,11 +5,11 @@ require('./events.js');
 
 global.application = api.events.enhancedEventEmitter();
 
-application.on('smth', function(data) {
+application.on('smth', (data) => {
   console.dir(data);
 });
 
-application.on('*', function(name, data) {
+application.on('*', (name, data) => {
   console.dir([name, data]);
 });
 

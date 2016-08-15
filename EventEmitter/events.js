@@ -1,16 +1,15 @@
 'use strict';
 
+global.api = {};
 api.events = require('events');
 
-api.events.enhancedEventEmitter = function() {
-  var ee = new api.events.EventEmitter(),
+api.events.enhancedEventEmitter = () => {
+  let ee = new api.events.EventEmitter(),
       emit = ee.emit;
-  ee.emit = function() {
-    var args = [];
-    Array.prototype.push.apply(args, arguments);
+  ee.emit = (...args) => {
+    emit.apply(ee, args);
     args.unshift('*');
     emit.apply(ee, args);
-    emit.apply(ee, arguments);
   };
   return ee;
 };
