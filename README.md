@@ -1,8 +1,8 @@
 ## Событийно-ориентированное программирование
 
 * Каталог `/EventEmitter`
-  - `emitter.js` - простейшая реализация EventEmitter
-  - `events.js` - расширенная версию EventEmitter для Node.js
+  - `simpleEventEmitter.js` - простейшая реализация EventEmitter
+  - `enhancedEventEmitter.js` - расширенная версию EventEmitter для Node.js
 * Каталог 'LiveTable' - пример таблицы, которая синхронизируется
 между несколькими браузерами через отправку событий по Websocket.
 
@@ -15,9 +15,9 @@ npm устаносит зависимости, указанные в `package.js
 
 ## Задания
 
-1. Реализовать расширенный EventEmitter, как в 'events.js' на базе простого из
-`emitter.js`, а не на базе встроенной в Node.js библиотеки `events`.
-Адаптировать расширенный EventEmitter для одинаковой работы как в Node.js, так
+1. Реализовать расширенный EventEmitter, как в 'enhancedEventEmitter.js' на базе
+простого из `simpleEventEmitter.js`, а не на базе встроенной в Node.js библиотеки
+`events`. Адаптировать расширенный EventEmitter для одинаковой работы в Node.js
 и в браузере.
 2. Модифицировать 'LiveTable' так, чтоб в ячейках можно было использовать
 формулы, как в электронных таблицах, например: `= A1 + B2`, но сделать это без

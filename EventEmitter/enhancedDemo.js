@@ -1,7 +1,7 @@
 'use strict';
 
 global.api = {};
-require('./events.js');
+require('./enhancedEventEmitter.js');
 
 global.application = api.events.enhancedEventEmitter();
 

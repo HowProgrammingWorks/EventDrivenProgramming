@@ -3,10 +3,10 @@
 global.api = {};
 api.events = require('events');
 
-api.events.enhancedEventEmitter = () => {
+api.events.enhancedEventEmitter = function() {
   let ee = new api.events.EventEmitter(),
       emit = ee.emit;
-  ee.emit = (...args) => {
+  ee.emit = function(...args) {
     emit.apply(ee, args);
     args.unshift('*');
     emit.apply(ee, args);
