@@ -1,13 +1,12 @@
 'use strict';
 
-global.api = {};
-api.fs = require('fs');
-api.http = require('http');
-api.websocket = require('websocket');
+const fs = require('fs');
+const http = require('http');
+const Websocket = require('websocket').server;
 
-const index = api.fs.readFileSync('./index.html');
+const index = fs.readFileSync('./index.html');
 
-const server = api.http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   res.writeHead(200);
   res.end(index);
 });
@@ -16,7 +15,7 @@ server.listen(80, () => {
   console.log('Listen port 80');
 });
 
-const ws = new api.websocket.server({
+const ws = new Websocket({
   httpServer: server,
   autoAcceptConnections: false
 });
@@ -39,5 +38,6 @@ ws.on('request', (req) => {
   });
   connection.on('close', (reasonCode, description) => {
     console.log('Disconnected ' + connection.remoteAddress);
+    console.dir({ reasonCode, description });
   });
 });
