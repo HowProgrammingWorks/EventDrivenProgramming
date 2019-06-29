@@ -15,18 +15,18 @@ input { border: 1px solid green; width: 30px; }
 
   let tr;
   tr = document.createElement('tr');
-  tr.innerHTML = '<td></td>' + letters.map(
-    (col) => '<td>' + col + '</td>'
-  ).join('');
+  tr.innerHTML = '<td></td>' + letters
+    .map(col => '<td>' + col + '</td>')
+    .join('');
   table.appendChild(tr);
 
   for (let i = 1; i <= 5; i++) {
     tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + i + '</td>' + letters.map(
-      (col) => '<td><input id="' + col + i + '" type="text"></td>'
-    ).join('');
+    tr.innerHTML = '<td>' + i + '</td>' + letters
+      .map(col => '<td><input id="' + col + i + '" type="text"></td>')
+      .join('');
     table.appendChild(tr);
-    letters.forEach((col) => {
+    letters.forEach(col => {
       let cell = col + i;
       let input = document.getElementById(cell);
       input.addEventListener('keyup', keyup);
@@ -43,7 +43,7 @@ input { border: 1px solid green; width: 30px; }
 
   let socket = new WebSocket('ws://127.0.0.1/');
 
-  socket.onmessage = (event) => {
+  socket.onmessage = event => {
     let change = JSON.parse(event.data);
     let cell = cells[change.cell];
     cell.value = change.value;
