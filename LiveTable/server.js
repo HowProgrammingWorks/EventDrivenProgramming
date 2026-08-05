@@ -25,11 +25,11 @@ const clients = [];
 ws.on('request', (req) => {
   const connection = req.accept('', req.origin);
   clients.push(connection);
-  console.log('Connected ' + connection.remoteAddress);
+  console.log(`Connected ${connection.remoteAddress}`);
   connection.on('message', (message) => {
-    const dataName = message.type + 'Data';
+    const dataName = `${message.type}Data`;
     const data = message[dataName];
-    console.log('Received: ' + data);
+    console.log(`Received: ${data}`);
     clients.forEach((client) => {
       if (connection !== client) {
         client.send(data);
@@ -37,7 +37,7 @@ ws.on('request', (req) => {
     });
   });
   connection.on('close', (reasonCode, description) => {
-    console.log('Disconnected ' + connection.remoteAddress);
+    console.log(`Disconnected ${connection.remoteAddress}`);
     console.dir({ reasonCode, description });
   });
 });
